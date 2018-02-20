@@ -1,0 +1,26 @@
+{
+  "name": "btkitcodingclub-twitter-bot",
+  "version": "1.0.0",
+  "description": "retweet tweets releated to btkitcodingclub",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shubham9411/btkitcodingclub-twitter-bot.git"
+  },
+  "keywords": [
+    "btkit",
+    "btkitcodingclub",
+    "twitter",
+    "twitter-bot",
+    "bot"
+  ],
+  "author": "Shubham Pandey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shubham9411/btkitcodingclub-twitter-bot/issues"
+  },
+  "homepage": "https://github.com/shubham9411/btkitcodingclub-twitter-bot#readme"
+}
