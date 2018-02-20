@@ -4,7 +4,8 @@
   "description": "retweet tweets releated to btkitcodingclub",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bot.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/shubham9411/btkitcodingclub-twitter-bot/issues"
   },
-  "homepage": "https://github.com/shubham9411/btkitcodingclub-twitter-bot#readme"
+  "homepage": "https://github.com/shubham9411/btkitcodingclub-twitter-bot#readme",
+  "dependencies": {
+    "twit": "^2.2.9"
+  }
 }
