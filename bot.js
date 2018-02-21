@@ -10,35 +10,55 @@ var config = require('./config.js');
  */
 
 var Twitter = new twit(config);
-var retweet = function () {
-    var params = {
-        q: '#btkitcodingclub',
-        result_type: 'recent',
-        lang: 'en'
-    }
+// 
+//  filter the twitter public stream by the word '#btkitcodingclub'.
+// 
+var streamStatus = Twitter.stream('statuses/filter', {
+	track: '#btkitcodingclub'
+})
 
-    Twitter.get('search/tweets', params, function (err, data) {
-        console.log('search complete');
-        if (!err) {
-            data.statuses.forEach(function (tweet, id) {
-                let retweetId = tweet.id_str;
-                console.log(retweetId);
-                Twitter.post('statuses/retweet/:id', {
-                    id: retweetId
-                }, function (err, response) {
-                    if (response) {
-                        console.log('Retweeted!!!');
-                    }
-                    if (err) {
-                        console.log('Something went wrong while RETWEETING... Duplication maybe...');
-                    }
-                });
-            })
-        } else {
-            console.log('Something went wrong while SEARCHING...');
-            console.log(err);
-        }
-    });
-}
-retweet()
-setInterval(retweet, 150000);
+streamStatus.on('tweet', function (tweet) {
+	let retweetId = tweet.id_str;
+	Twitter.post('statuses/retweet/:id', {
+		id: retweetId
+	}, function (err, response) {
+		if (response) {
+			console.log('Retweeted!!!', response);
+		}
+		if (err) {
+			console.log('Something went wrong while RETWEETING... Duplication maybe...');
+		}
+	});
+})
+streamStatus.on('connect', function (request) {
+	console.log('Starting Bot');
+})
+
+streamStatus.on('connected', function (response) {
+	console.log('Bot Connected');
+})
+
+
+var streamUser = Twitter.stream('user', {
+	stringify_friend_ids: true
+})
+
+streamUser.on('connect', function (request) {
+	console.log('Starting Bot');
+})
+
+streamUser.on('connected', function (response) {
+	console.log('Bot Connected');
+})
+
+streamUser.on('direct_message', function (directMsg) {
+	// If someone sends the direct_message
+})
+streamUser.on('follow', function (follow) {
+	console.log(follow.source.screen_name, ' Followed')
+	Twitter.post('statuses/update', {
+		status: 'Hey @' + follow.source.screen_name + ' thanks for your follow! :)'
+	}, function (err, data, response) {
+		console.log(data)
+	})
+})
