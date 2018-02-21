@@ -1,3 +1,4 @@
+var http = require('http')
 var twit = require('twit');
 var config = require('./config.js');
 
@@ -62,3 +63,12 @@ streamUser.on('follow', function (follow) {
 		console.log(data)
 	})
 })
+
+var server = http.createServer( function ( req, res ){
+	res.writeHead(200, {
+		'Content-Type': 'text/plain'
+	});
+	res.end('Hello world');
+});
+server.listen(process.env.PORT || 3000)
+
