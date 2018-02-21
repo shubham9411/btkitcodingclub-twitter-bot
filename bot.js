@@ -58,7 +58,7 @@ streamUser.on('direct_message', function (directMsg) {
 streamUser.on('follow', function (follow) {
 	console.log(follow.source.screen_name, ' Followed')
 	Twitter.post('statuses/update', {
-		status: 'Hey @' + follow.source.screen_name + ' thanks for your follow! :)'
+		status: 'Hey @' + follow.source.screen_name + ' thanks for your follow! what are you doing today? :)'
 	}, function (err, data, response) {
 		console.log(data)
 	})
