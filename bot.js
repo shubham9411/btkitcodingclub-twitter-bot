@@ -15,7 +15,7 @@ var Twitter = new twit(config);
 //  filter the twitter public stream by the word '#btkitcodingclub'.
 // 
 var streamStatus = Twitter.stream('statuses/filter', {
-	track: '#btkitcodingclub'
+	track: ['#btkitCodingClub']
 })
 
 streamStatus.on('tweet', function (tweet) {
