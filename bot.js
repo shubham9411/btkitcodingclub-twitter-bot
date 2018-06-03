@@ -63,6 +63,40 @@ streamUser.on('follow', function (follow) {
 		console.log(data)
 	})
 })
+var Twitter = new twit(config);
+var retweet = function () {
+    var params = {
+        q: '#btkitcodingclub',
+        result_type: 'recent',
+        lang: 'en'
+    }
+
+    Twitter.get('search/tweets', params, function (err, data) {
+        console.log('search complete');
+        if (!err) {
+            data.statuses.forEach(function (tweet, id) {
+                let retweetId = tweet.id_str;
+                console.log(retweetId);
+                Twitter.post('statuses/retweet/:id', {
+                    id: retweetId
+                }, function (err, response) {
+                    if (response) {
+                        console.log('Retweeted!!!');
+                    }
+                    if (err) {
+                        console.log('Something went wrong while RETWEETING... Duplication maybe...');
+                    }
+                });
+            })
+        } else {
+            console.log('Something went wrong while SEARCHING...');
+            console.log(err);
+        }
+    });
+}
+retweet()
+setInterval(retweet, 150000);
+
 
 var server = http.createServer( function ( req, res ){
 	res.writeHead(200, {
